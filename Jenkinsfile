@@ -25,8 +25,6 @@ pipeline {
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerhubPassword', usernameVariable: 'dockerhubUser')]) {
         	      sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPassword}"
-                  sh 'docker push mkhamis/${JOB_NAME}:v1.${BUILD_NUMBER}'
-                  sh 'docker push mkhamis/${JOB_NAME}:latest'
                   sh 'docker rmi ${JOB_NAME}:v1.${BUILD_NUMBER} mkhamis/${JOB_NAME}:v1.${BUILD_NUMBER} mkhamis/${JOB_NAME}:latest'
                 }      
             }
